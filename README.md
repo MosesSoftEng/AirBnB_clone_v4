@@ -161,11 +161,55 @@ Moses MWwangi - [Github](https://github.com/MosesSoftEng) / [Twitter](https://tw
 Public Domain. No copy write protection. 
 
 
-
+## Project setup
 ```bash
 gt clone https://github.com/jzamora5/AirBnB_clone_v3.git AirBnB_clone_v4
 cd AirBnB_clone_v4
 git branch dev
 git checkout dev
+```
+
+
+
+## 1. Cash only
+```bash
+# Create folders and files.
+mkdir -p web_dynamic/templates
+touch web_dynamic/0-hbnb.py web_dynamic/templates/0-hbnb.html
+
+# Copy files from web_flask to web_dynamic
+cp -r web_flask/static/ web_dynamic
+cp web_flask/templates/100-hbnb.html web_dynamic/templates/100-hbnb.html
+cp web_flask/__init__.py web_dynamic/__init__.py
+cp web_flask/100-hbnb.py web_dynamic/100-hbnb.py
+
+# Rename files
+mv web_dynamic/100-hbnb.py web_dynamic/0-hbnb.py
+mv web_dynamic/templates/100-hbnb.html web_dynamic/templates/0-hbnb.html
+
+# Start MySQL server
+sudo service mysql start
+
+# Test
+HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.0-hbnb
+
+guillaume@ubuntu:~/AirBnB_v4$ curl -s -XGET http://0.0.0.0:5000/0-hbnb/ | head -6
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css?e211c9eb-7d17-4f12-85eb-4d50fa50cb1d" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css?e211c9eb-7d17-4f12-85eb-4d50fa50cb1d" />
+guillaume@ubuntu:~/AirBnB_v4$ curl -s -XGET http://0.0.0.0:5000/0-hbnb/ | head -6
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css?f834413e-0aa9-4767-b64a-c92db9cb1f82" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css?f834413e-0aa9-4767-b64a-c92db9cb1f82" />
+guillaume@ubuntu:~/AirBnB_v4$
+
+pycodestyle web_dynamic/0-hbnb.py
+pycodestyle web_dynamic/100-hbnb.py
 ```
 
