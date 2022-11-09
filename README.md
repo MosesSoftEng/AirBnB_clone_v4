@@ -169,7 +169,6 @@ git branch dev
 git checkout dev
 ```
 
-
 ## 1. Cash only
 ```bash
 # Create folders and files.
@@ -191,6 +190,9 @@ sudo service mysql start
 
 # Test
 HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.0-hbnb
+
+# In browser
+http://127.0.0.1:5000/0-hbnb/
 
 guillaume@ubuntu:~/AirBnB_v4$ curl -s -XGET http://0.0.0.0:5000/0-hbnb/ | head -6
 <!DOCTYPE HTML>
@@ -231,7 +233,6 @@ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost H
 # See all states
 echo 'all State' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
 
-
 # Create a city
 echo 'create City state_id="95a5abab-aa65-4861-9bc6-1da4a36069aa" name="San_Jose"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
 
@@ -243,13 +244,40 @@ echo 'create User email="gui@hbtn.io" password="guipwd" first_name="Guillaume" l
 
 55392556-6288-42af-a2f6-0ac77e79b120
 
+```bash
+# Run sile
+HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.1-hbnb
+```
+
 # Create place
 echo 'create Place city_id="67a02f86-da6f-4867-97ba-085a0f0184ab" user_id="55392556-6288-42af-a2f6-0ac77e79b120" name="Lovely_place" number_rooms=3 number_bathrooms=1 max_guest=6 price_by_night=120 latitude=37.773972 longitude=-122.431297' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
 
 3d32582d-4589-4072-9598-7ec3a02317cd
 
+## 3. API status
+```bash
+cp web_dynamic/1-hbnb.py web_dynamic/2-hbnb.py
+cp web_dynamic/templates/1-hbnb.html web_dynamic/templates/2-hbnb.html
+cp web_dynamic/static/scripts/1-hbnb.js web_dynamic/static/scripts/2-hbnb.js
+
+# Error
+# ModuleNotFoundError: No module named 'flasgger'
+# Install flasgger
+sudo pip3 install flasgger
+
+# Error
+# ModuleNotFoundError: No module named 'flask_cors'
+# Install Flask-Cors
+sudo pip3 install Flask-Cors
+
+# start the API in the port 5001
+HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db HBNB_API_PORT=5001 python3 -m api.v1.app
+
+# Run web
+HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.2-hbnb
 
 
-
+# In browser
+http://127.0.0.1:5000/2-hbnb/
 ```
 
