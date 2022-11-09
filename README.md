@@ -161,11 +161,95 @@ Moses MWwangi - [Github](https://github.com/MosesSoftEng) / [Twitter](https://tw
 Public Domain. No copy write protection. 
 
 
-
+## Project setup
 ```bash
 gt clone https://github.com/jzamora5/AirBnB_clone_v3.git AirBnB_clone_v4
 cd AirBnB_clone_v4
 git branch dev
 git checkout dev
+```
+
+
+## 1. Cash only
+```bash
+# Create folders and files.
+mkdir -p web_dynamic/templates
+touch web_dynamic/0-hbnb.py web_dynamic/templates/0-hbnb.html
+
+# Copy files from web_flask to web_dynamic
+cp -r web_flask/static/ web_dynamic
+cp web_flask/templates/100-hbnb.html web_dynamic/templates/100-hbnb.html
+cp web_flask/__init__.py web_dynamic/__init__.py
+cp web_flask/100-hbnb.py web_dynamic/100-hbnb.py
+
+# Rename files
+mv web_dynamic/100-hbnb.py web_dynamic/0-hbnb.py
+mv web_dynamic/templates/100-hbnb.html web_dynamic/templates/0-hbnb.html
+
+# Start MySQL server
+sudo service mysql start
+
+# Test
+HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.0-hbnb
+
+guillaume@ubuntu:~/AirBnB_v4$ curl -s -XGET http://0.0.0.0:5000/0-hbnb/ | head -6
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css?e211c9eb-7d17-4f12-85eb-4d50fa50cb1d" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css?e211c9eb-7d17-4f12-85eb-4d50fa50cb1d" />
+guillaume@ubuntu:~/AirBnB_v4$ curl -s -XGET http://0.0.0.0:5000/0-hbnb/ | head -6
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css?f834413e-0aa9-4767-b64a-c92db9cb1f82" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css?f834413e-0aa9-4767-b64a-c92db9cb1f82" />
+guillaume@ubuntu:~/AirBnB_v4$
+
+pycodestyle web_dynamic/0-hbnb.py
+pycodestyle web_dynamic/100-hbnb.py
+```
+
+## 2. Select some Amenities to be comfortable!
+```bash
+cp web_dynamic/0-hbnb.py web_dynamic/1-hbnb.py
+cp web_dynamic/templates/0-hbnb.html web_dynamic/templates/1-hbnb.html
+
+mkdir -p web_dynamic/static/scripts
+touch web_dynamic/static/scripts/1-hbnb.js
+
+HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.1-hbnb
+
+
+# Populate state and cities.
+
+# Create a state
+'create State name="California"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py 
+
+# See all states
+echo 'all State' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+
+
+# Create a city
+echo 'create City state_id="95a5abab-aa65-4861-9bc6-1da4a36069aa" name="San_Jose"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+
+# All cities
+echo 'all City' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+
+# Create user
+echo 'create User email="gui@hbtn.io" password="guipwd" first_name="Guillaume" last_name="Snow"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+
+55392556-6288-42af-a2f6-0ac77e79b120
+
+# Create place
+echo 'create Place city_id="67a02f86-da6f-4867-97ba-085a0f0184ab" user_id="55392556-6288-42af-a2f6-0ac77e79b120" name="Lovely_place" number_rooms=3 number_bathrooms=1 max_guest=6 price_by_night=120 latitude=37.773972 longitude=-122.431297' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+
+3d32582d-4589-4072-9598-7ec3a02317cd
+
+
+
+
 ```
 
