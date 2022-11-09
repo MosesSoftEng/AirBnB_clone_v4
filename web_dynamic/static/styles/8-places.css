@@ -99,3 +99,14 @@
 .user {
   margin-bottom: 1.5%;
 }
+
+.popover input[type='checkbox'] {
+  margin-right: 10px;
+}
+
+.amenities h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: inherit;
+}
