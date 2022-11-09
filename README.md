@@ -170,7 +170,6 @@ git checkout dev
 ```
 
 
-
 ## 1. Cash only
 ```bash
 # Create folders and files.
@@ -211,5 +210,11 @@ guillaume@ubuntu:~/AirBnB_v4$
 
 pycodestyle web_dynamic/0-hbnb.py
 pycodestyle web_dynamic/100-hbnb.py
+```
+
+## 2. Select some Amenities to be comfortable!
+```bash
+cp web_dynamic/0-hbnb.py web_dynamic/1-hbnb.py
+cp web_dynamic/templates/0-hbnb.html web_dynamic/templates/1-hbnb.html
 ```
 
